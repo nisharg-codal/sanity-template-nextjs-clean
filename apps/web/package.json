@@ -1,0 +1,44 @@
+{
+  "name": "@repo/web",
+  "version": "0.0.1",
+  "private": true,
+  "description": "@repo/web description",
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "predev": "pnpm typegen",
+    "dev": "next dev --turbopack",
+    "format": "prettier . --check --log-level silent --ignore-path ../../.gitignore",
+    "format:fix": "prettier . --write --log-level silent --ignore-path ../../.gitignore",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "script:lint": "bash -e ../../scripts/lint.sh --filter=@repo/web",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "typegen": "sanity typegen generate"
+  },
+  "dependencies": {
+    "@sanity/image-url": "^2.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "next": "^16.1.6",
+    "next-sanity": "^12.1.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sanity": "^5.16.0",
+    "server-only": "^0.0.1",
+    "tailwind-merge": "^3.5.0"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@tailwindcss/postcss": "^4.2.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.1",
+    "type-fest": "^5.4.4"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}
