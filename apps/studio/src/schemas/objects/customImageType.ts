@@ -3,6 +3,8 @@ import { defineField, defineType } from 'sanity';
 import { stringValidationMessages } from '@/constants/messages';
 import { validateNoEdgeSpaces } from '@/validators/validation';
 
+import type { CustomImage } from '@/types/generated/sanity.types';
+
 export const customOptionalImageType = defineType({
   title: 'Image',
   name: 'customOptionalImage',
