@@ -4,7 +4,7 @@ import { defineConfig } from 'sanity';
 import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
-import envs from '@/config/envs';
+import { envs } from '@/config';
 import schemaTypes from '@/schemas';
 import structure from '@/structure';
 

@@ -1,2 +1,1 @@
-pnpm typegen
 pnpm --silent script:lint --for=check

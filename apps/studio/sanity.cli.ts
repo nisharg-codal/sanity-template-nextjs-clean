@@ -1,7 +1,7 @@
 import { defineCliConfig } from 'sanity/cli';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-import envs from '@/config/envs';
+import { envs } from '@/config';
 
 const { SANITY_STUDIO_PROJECT_ID, SANITY_STUDIO_APP_ID, SANITY_STUDIO_HOSTNAME } = envs;
 
