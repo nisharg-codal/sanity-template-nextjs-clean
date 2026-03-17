@@ -23,6 +23,7 @@
     "root:lint": "eslint .",
     "root:lint:fix": "eslint . --fix",
     "script:lint": "bash -e ./scripts/lint.sh",
+    "studio:dev": "pnpm --filter @repo/studio dev",
     "typecheck": "pnpm -r typecheck",
     "web:dev": "pnpm --filter @repo/web dev"
   },

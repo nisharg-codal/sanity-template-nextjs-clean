@@ -11,8 +11,9 @@ export default defineCliConfig({
   },
   typegen: {
     path: './src/sanity/**/*.{ts,tsx}',
-    schema: '../studio/sanity.schema.json',
+    schema: '../studio/schema.json',
     generates: './src/sanity/generated/types/sanity.types.ts',
     overloadClientMethods: true,
+    formatGeneratedCode: true,
   },
 });
