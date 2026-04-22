@@ -1,11 +1,10 @@
 import { getWorkspaceContentTypes } from '@/structure/getWorkspaceContentTypes';
-import renderContentType from '@/structure/renderContentType';
 
 import type { StructureResolver } from 'sanity/structure';
 
 import type { WorkspaceType } from '@/constants/@types/objects.types';
 
-const structure: StructureResolver = (S, context) => {
+const manualStructure: StructureResolver = (S, context) => {
   const { currentUser, schema } = context;
   const { _original: original } = schema;
   const workspace = original?.name as WorkspaceType;
@@ -18,13 +17,7 @@ const structure: StructureResolver = (S, context) => {
     return S.list().title('Content Types Not Configured');
   }
 
-  return S.list()
-    .title('Content Types')
-    .items(
-      workspaceContentTypes
-        .map((contentType) => renderContentType(S, contentType, currentUser))
-        .filter((item) => item !== null),
-    );
+  return S.list().title('Sites').items();
 };
 
-export default structure;
+export default manualStructure;

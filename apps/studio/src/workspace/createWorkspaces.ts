@@ -6,7 +6,6 @@ import { structureTool } from 'sanity/structure';
 import envs from '@/config/envs';
 import { userRoles } from '@/constants/objects';
 import schemaTypes from '@/schemas';
-import structure from '@/structure';
 import { documentActions } from '@/workspace/documentActions';
 import { templates } from '@/workspace/templates';
 import { getUserRoles } from '@/workspace/userRoles';
@@ -19,40 +18,44 @@ const { SANITY_STUDIO_PROJECT_ID, SANITY_STUDIO_PREVIEW_URL } = envs;
 type CreateWorkspaces = () => WorkspaceConfig[];
 
 const createWorkspaces: CreateWorkspaces = () =>
-  workspaces.map((workspace) => ({
-    ...workspace,
-    projectId: SANITY_STUDIO_PROJECT_ID,
-    plugins: [
-      structureTool({
-        structure,
-      }),
-      presentationTool({
-        previewUrl: {
-          origin: SANITY_STUDIO_PREVIEW_URL,
-          previewMode: {
-            enable: '/api/draft-mode/enable',
+  workspaces.map((workspace) => {
+    const { structure } = workspace;
+
+    return {
+      ...workspace,
+      projectId: SANITY_STUDIO_PROJECT_ID,
+      plugins: [
+        structureTool({
+          structure,
+        }),
+        presentationTool({
+          previewUrl: {
+            origin: SANITY_STUDIO_PREVIEW_URL,
+            previewMode: {
+              enable: '/api/draft-mode/enable',
+            },
           },
-        },
-      }),
-      assist(),
-      visionTool(),
-    ],
-    schema: {
-      types: schemaTypes,
-      templates,
-    },
-    document: {
-      actions: documentActions,
-    },
-    tools: (prev, context) => {
-      const { currentUser } = context;
+        }),
+        assist(),
+        visionTool(),
+      ],
+      schema: {
+        types: schemaTypes,
+        templates,
+      },
+      document: {
+        actions: documentActions,
+      },
+      tools: (prev, context) => {
+        const { currentUser } = context;
 
-      const isAdmin = getUserRoles({ currentUser }).includes(userRoles.ADMINISTRATOR);
+        const isAdmin = getUserRoles({ currentUser }).includes(userRoles.ADMINISTRATOR);
 
-      if (!isAdmin) return prev.filter((tool) => tool.name !== 'vision');
+        if (!isAdmin) return prev.filter((tool) => tool.name !== 'vision');
 
-      return prev;
-    },
-  }));
+        return prev;
+      },
+    };
+  });
 
 export default createWorkspaces;
