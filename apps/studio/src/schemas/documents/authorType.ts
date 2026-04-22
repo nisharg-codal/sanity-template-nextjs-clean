@@ -2,14 +2,15 @@ import { UserIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
 
 import { groups } from '@/constants/groups';
+import { schemaNames } from '@/constants/objects/schemaNames';
 import { customOptionalImageType } from '@/schemas/objects/customImageType';
 import { validateNoEdgeSpaces } from '@/validators/validation';
 
 import type { SlugValue } from 'sanity';
 
 export const authorType = defineType({
-  name: 'author',
   title: 'Author',
+  name: schemaNames.AUTHOR,
   type: 'document',
   icon: UserIcon,
   groups,

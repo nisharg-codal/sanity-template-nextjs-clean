@@ -1,17 +1,29 @@
-import contentTypes from '@/structure/contentTypes';
-import { getContentTypes } from '@/structure/getContentTypes';
+import { getWorkspaceContentTypes } from '@/structure/getWorkspaceContentTypes';
 import renderContentType from '@/structure/renderContentType';
 
 import type { StructureResolver } from 'sanity/structure';
 
-const structure: StructureResolver = (S) => {
-  const types = getContentTypes(contentTypes, '1');
-  console.log(types);
+import type { WorkspaceType } from '@/constants/@types/objects.types';
+
+const structure: StructureResolver = (S, context) => {
+  const { currentUser, schema } = context;
+  const { _original: original } = schema;
+  const workspace = original?.name as WorkspaceType;
+
+  if (!workspace || !currentUser) return S.list().title('Content').items([]);
+
+  const workspaceContentTypes = getWorkspaceContentTypes(workspace, currentUser);
+
+  if (!workspaceContentTypes || workspaceContentTypes.length === 0) {
+    return S.list().title('No Sites Configured');
+  }
 
   return S.list()
-    .title('Sanity')
+    .title('Sites')
     .items(
-      types.map((contentType) => renderContentType(S, contentType)).filter((item) => item !== null),
+      workspaceContentTypes
+        .map((contentType) => renderContentType(S, contentType, currentUser))
+        .filter((item) => item !== null),
     );
 };
 

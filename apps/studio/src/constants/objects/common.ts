@@ -2,3 +2,26 @@ export const environments = {
   DEVELOPMENT: 'development',
   PRODUCTION: 'production',
 } as const;
+
+export const userRoles = {
+  ADMINISTRATOR: 'administrator',
+  EDITOR: 'editor',
+  DEVELOPER: 'developer',
+  CONTRIBUTOR: 'contributor',
+  VIEWER: 'viewer',
+} as const;
+
+export const sanityActions = {
+  DELETE: 'delete',
+  DISCARD_CHANGES: 'discardChanges',
+  DISCARD_VERSION: 'discardVersion',
+  DUPLICATE: 'duplicate',
+  RESTORE: 'restore',
+  PUBLISH: 'publish',
+  UNPUBLISH: 'unpublish',
+  UNPUBLISH_VERSION: 'unpublishVersion',
+  LINK_TO_CANVAS: 'linkToCanvas',
+  EDIT_IN_CANVAS: 'editInCanvas',
+  UNLINK_FROM_CANVAS: 'unlinkFromCanvas',
+  SCHEDULE: 'schedule',
+} as const;

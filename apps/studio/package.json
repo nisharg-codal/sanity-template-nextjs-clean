@@ -16,7 +16,7 @@
     "script:lint": "bash -e ../../scripts/lint.sh --filter=@repo/studio",
     "start": "sanity start",
     "typecheck": "tsc --noEmit",
-    "typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate"
+    "typegen": "sanity schema extract  --workspace structure-builder --enforce-required-fields && sanity typegen generate"
   },
   "dependencies": {
     "@sanity/assist": "^5.0.4",
@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@types/pluralize": "^0.0.33",
     "@types/react": "^19.2.14",
     "babel-plugin-react-compiler": "^1.0.0",
     "type-fest": "^5.6.0",

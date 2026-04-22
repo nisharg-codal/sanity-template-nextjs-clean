@@ -1,33 +1,34 @@
 import { ComponentIcon } from '@sanity/icons';
 
+import { workspaceTypes } from '@/constants/objects';
 import { authorType } from '@/schemas/documents/authorType';
 import { homepageType } from '@/schemas/documents/homepageType';
 
 import type { ContentTypes } from '@/structure/@types/contentTypes.types';
 
-const contentTypes = [
+export const structureBuilderContentTypes: ContentTypes[] = [
   {
-    title: homepageType.title,
     schemaType: homepageType.name,
-    icon: homepageType.icon,
+    roles: [],
+    workspaces: [workspaceTypes.STRUCTURE_BUILDER],
     singleton: true,
   },
   {
-    title: authorType.title,
     schemaType: authorType.name,
-    icon: authorType.icon,
+    roles: [],
+    workspaces: [workspaceTypes.STRUCTURE_BUILDER],
   },
   {
     title: 'Drawer Example',
     icon: ComponentIcon,
+    roles: [],
+    workspaces: [workspaceTypes.STRUCTURE_BUILDER],
     children: [
       {
-        title: authorType.title,
         schemaType: authorType.name,
-        icon: authorType.icon,
+        roles: [],
+        workspaces: [workspaceTypes.STRUCTURE_BUILDER],
       },
     ],
   },
-] satisfies ContentTypes[];
-
-export default contentTypes;
+];

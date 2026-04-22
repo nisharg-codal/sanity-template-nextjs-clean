@@ -1,19 +1,24 @@
+import { plural } from 'pluralize';
+
 import { constants } from '@/constants/objects';
 
 import type { RenderContentType } from '@/structure/@types/common.types';
 
-const renderContentType: RenderContentType = (S, contentType) => {
+const renderContentType: RenderContentType = (S, contentType, currentUser) => {
   const {
     id,
     schemaType,
     children,
     singleton,
+    isPlural,
     filter = [],
     filterParams = {},
     title = '',
     icon = '',
     isDivider = false,
   } = contentType;
+
+  const roleFilter = typeof filter === 'function' ? filter(currentUser) : filter;
 
   if (isDivider) return S.divider().title(title);
 
@@ -27,30 +32,49 @@ const renderContentType: RenderContentType = (S, contentType) => {
         S.list()
           .title(title)
           .items(
-            children.map((child) => renderContentType(S, child)).filter((child) => child !== null),
+            children
+              .map((child) => renderContentType(S, child, currentUser))
+              .filter((child) => child !== null),
           ),
       );
   }
 
   if (!schemaType) return null;
 
+  const schemaTitle = (() => {
+    const sanityTitle = S.documentTypeListItem(schemaType).getTitle();
+    const isItPlural = isPlural ?? !singleton;
+    const mainTitle = title || (sanityTitle ?? '');
+
+    return isItPlural ? plural(mainTitle) : mainTitle;
+  })();
+
   // Handle Document Types
   return S.listItem()
-    .title(title)
+    .title(schemaTitle)
     .id(id)
     .icon(icon)
     .schemaType(schemaType)
     .child(
       (() => {
         if (singleton) {
-          return S.editor().id([schemaType, constants.SINGLETON].join('-')).schemaType(schemaType);
+          const schemaBuilder = S.editor()
+            .id([schemaType, constants.SINGLETON_KEY].join('-'))
+            .schemaType(schemaType);
+
+          return schemaBuilder;
         }
 
-        return S.documentTypeList(schemaType)
+        const schemaBuilder = S.documentTypeList(schemaType)
+          .title(schemaTitle)
           .id(id)
-          .title(title)
-          .filter(['_type == $schemaType', ...(filter ?? [])].join(' && '))
-          .params({ schemaType, ...filterParams });
+          .filter(['_type == $schemaType', ...(roleFilter ?? [])].join(' && '))
+          .params({
+            schemaType,
+            ...filterParams,
+          });
+
+        return schemaBuilder;
       })(),
     );
 };

@@ -1,5 +1,5 @@
 export const constants = {
-  SINGLETON: 'singleton',
+  SINGLETON_KEY: 'singleton',
   DATE_FORMAT: 'MM/DD/YYYY',
   TIME_FORMAT: 'hh:mm A',
 } as const;
