@@ -22,7 +22,6 @@ export const structureBuilderContentTypes: ContentTypes[] = [
     schemaType: schemaNames.AUTHOR,
     roles: [],
     workspaces: [workspaceTypes.STRUCTURE_BUILDER],
-    filters: [],
   },
   {
     title: 'Author 2',
@@ -31,6 +30,13 @@ export const structureBuilderContentTypes: ContentTypes[] = [
     roles: [],
     workspaces: [workspaceTypes.STRUCTURE_BUILDER],
     isPlural: false,
+  },
+  {
+    title: 'Authors from GROQ',
+    icon: AddUserIcon,
+    roles: [],
+    workspaces: [workspaceTypes.STRUCTURE_BUILDER],
+    filters: ['_type ==  "author"'],
   },
   {
     title: 'Drawer Example',

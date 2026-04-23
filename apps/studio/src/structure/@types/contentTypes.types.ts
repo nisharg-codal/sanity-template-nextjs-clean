@@ -4,7 +4,7 @@ import type { CurrentUser } from 'sanity';
 
 import type { UserRole, WorkspaceType } from '@/constants/@types/objects.types';
 
-export type ContentTypeFilter = string[] | ((currentUser: CurrentUser) => string[]);
+export type ContentTypeFilters = string[] | ((currentUser: CurrentUser) => string[]);
 
 export interface ContentTypes {
   title?: string;
@@ -14,11 +14,12 @@ export interface ContentTypes {
   workspaces: WorkspaceType[];
   children?: ContentTypes[];
   singleton?: boolean;
-  filters?: ContentTypeFilter;
+  filters?: ContentTypeFilters;
   filterParams?: Record<string, unknown>;
   hideAddButton?: boolean;
   isDivider?: boolean;
   isPlural?: boolean;
+  templates?: Record<string, string | number | boolean>;
 }
 
 export interface ContentTypesExtended extends ContentTypes {

@@ -23,6 +23,11 @@ const baseWorkspaces = [
     title: 'Roles',
     structure,
   },
+  {
+    name: workspaceTypes.TEMPLATES,
+    title: 'Templates',
+    structure,
+  },
 ] satisfies SetOptional<Workspace, 'basePath' | 'dataset'>[];
 
 const workspaces = baseWorkspaces.map((item) => ({

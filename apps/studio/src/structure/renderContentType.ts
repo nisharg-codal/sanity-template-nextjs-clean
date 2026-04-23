@@ -11,6 +11,7 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
     children,
     singleton,
     isPlural,
+    templates,
     filters = [],
     filterParams = {},
     title = '',
@@ -39,6 +40,19 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
       );
   }
 
+  if (!schemaType && filters.length > 0) {
+    return S.listItem()
+      .title(title)
+      .id(id)
+      .icon(icon)
+      .child(
+        S.documentList()
+          .title(title)
+          .filter([...(roleFilter ?? [])].join(' && '))
+          .params({ ...filterParams }),
+      );
+  }
+
   if (!schemaType) return null;
 
   const schemaTitle = (() => {
@@ -62,6 +76,13 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
             .id([schemaType, constants.SINGLETON_KEY].join('-'))
             .schemaType(schemaType);
 
+          if (templates) {
+            return schemaBuilder.initialValueTemplate(
+              [schemaType, ...Object.keys(templates)].join('-'),
+              templates,
+            );
+          }
+
           return schemaBuilder;
         }
 
@@ -73,6 +94,15 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
             schemaType,
             ...filterParams,
           });
+
+        if (templates) {
+          return schemaBuilder.initialValueTemplates([
+            S.initialValueTemplateItem(
+              [schemaType, ...Object.keys(templates)].join('-'),
+              templates,
+            ),
+          ]);
+        }
 
         return schemaBuilder;
       })(),
