@@ -1,4 +1,4 @@
-import { UserIcon } from '@sanity/icons';
+import { CogIcon } from '@sanity/icons';
 import { defineField, defineType } from 'sanity';
 
 import { groups } from '@/constants/groups';
@@ -6,13 +6,11 @@ import { schemaNames } from '@/constants/objects/schemaNames';
 import { customImageType } from '@/schemas/objects/customImageType';
 import { validateNoEdgeSpaces } from '@/validators/validation';
 
-import type { SlugValue } from 'sanity';
-
-export const authorType = defineType({
-  title: 'Author',
-  name: schemaNames.AUTHOR,
+export const settingsType = defineType({
+  title: 'Settings',
+  name: schemaNames.SETTINGS,
   type: 'document',
-  icon: UserIcon,
+  icon: CogIcon,
   groups,
   preview: {
     select: {
@@ -23,38 +21,22 @@ export const authorType = defineType({
   },
   fields: [
     defineField({
-      title: 'Name',
-      name: 'name',
+      title: 'Company Name',
+      name: 'companyName',
       type: 'string',
       validation: (rule) => rule.required().custom(validateNoEdgeSpaces),
     }),
     defineField({
-      title: 'Slug',
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'name',
-      },
-      validation: (rule) =>
-        rule.required().custom<SlugValue>((value) => validateNoEdgeSpaces(value?.current)),
-    }),
-    defineField({
-      title: 'Description',
-      name: 'description',
-      type: 'text',
-      validation: (rule) => rule.custom(validateNoEdgeSpaces),
-    }),
-    defineField({
-      title: 'Avatar',
-      name: 'avatar',
+      title: 'Company Logo',
+      name: 'companyLogo',
       type: customImageType.name,
       validation: (rule) => rule.required(),
     }),
     defineField({
-      title: 'Active',
-      name: 'isActive',
+      title: 'Maintenance Mode',
+      name: 'maintenanceMode',
       type: 'boolean',
-      initialValue: true,
+      initialValue: false,
       validation: (rule) => rule.required(),
     }),
   ],

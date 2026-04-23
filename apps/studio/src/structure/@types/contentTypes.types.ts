@@ -14,11 +14,10 @@ export interface ContentTypes {
   workspaces: WorkspaceType[];
   children?: ContentTypes[];
   singleton?: boolean;
-  filter?: ContentTypeFilter;
+  filters?: ContentTypeFilter;
   filterParams?: Record<string, unknown>;
   hideAddButton?: boolean;
   isDivider?: boolean;
-  isPage?: boolean;
   isPlural?: boolean;
 }
 

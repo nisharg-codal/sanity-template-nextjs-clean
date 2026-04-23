@@ -1,23 +1,65 @@
-import { getWorkspaceContentTypes } from '@/structure/getWorkspaceContentTypes';
+import { AddUserIcon, ComponentIcon } from '@sanity/icons';
+
+import { constants } from '@/constants/objects';
+import { schemaNames } from '@/constants/objects/schemaNames';
 
 import type { StructureResolver } from 'sanity/structure';
 
-import type { WorkspaceType } from '@/constants/@types/objects.types';
+const manualStructure: StructureResolver = (S) =>
+  S.list()
+    .title('Content Types')
+    .items([
+      // Divider: General
+      S.divider().title('General'),
 
-const manualStructure: StructureResolver = (S, context) => {
-  const { currentUser, schema } = context;
-  const { _original: original } = schema;
-  const workspace = original?.name as WorkspaceType;
+      // Homepage
+      S.listItem()
+        .title('Homepage')
+        .schemaType(schemaNames.HOMEPAGE)
+        .child(
+          S.editor()
+            .schemaType(schemaNames.HOMEPAGE)
+            .documentId([schemaNames.HOMEPAGE, constants.SINGLETON_KEY].join('-')),
+        ),
 
-  if (!workspace || !currentUser) return S.list().title('Content').items([]);
+      // Author (Listing)
+      S.listItem()
+        .title('Authors')
+        .schemaType(schemaNames.AUTHOR)
+        .child(S.documentTypeList(schemaNames.AUTHOR).title('Authors')),
 
-  const workspaceContentTypes = getWorkspaceContentTypes(workspace, currentUser);
+      // Author 2 (Singular naming)
+      S.listItem()
+        .title('Author 2')
+        .icon(AddUserIcon)
+        .schemaType(schemaNames.AUTHOR)
+        .child(S.documentTypeList(schemaNames.AUTHOR).title('Author 2')),
 
-  if (!workspaceContentTypes || workspaceContentTypes.length === 0) {
-    return S.list().title('Content Types Not Configured');
-  }
+      // Divider: Drawer Example
+      S.divider().title('Drawer Example'),
 
-  return S.list().title('Sites').items();
-};
+      // Drawer (Nested children)
+      S.listItem()
+        .title('Drawer')
+        .icon(ComponentIcon)
+        .child(
+          S.list()
+            .title('Drawer')
+            .items([
+              // Author
+              S.listItem()
+                .title('Authors')
+                .schemaType(schemaNames.AUTHOR)
+                .child(S.documentTypeList(schemaNames.AUTHOR).title('Authors')),
+
+              // Author 2
+              S.listItem()
+                .title('Author 2')
+                .icon(AddUserIcon)
+                .schemaType(schemaNames.AUTHOR)
+                .child(S.documentTypeList(schemaNames.AUTHOR).title('Author 2')),
+            ]),
+        ),
+    ]);
 
 export default manualStructure;

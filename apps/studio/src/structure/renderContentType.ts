@@ -11,14 +11,14 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
     children,
     singleton,
     isPlural,
-    filter = [],
+    filters = [],
     filterParams = {},
     title = '',
     icon = '',
     isDivider = false,
   } = contentType;
 
-  const roleFilter = typeof filter === 'function' ? filter(currentUser) : filter;
+  const roleFilter = typeof filters === 'function' ? filters(currentUser) : filters;
 
   if (isDivider) return S.divider().title(title);
 
