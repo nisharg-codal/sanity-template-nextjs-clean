@@ -16,6 +16,7 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
     filterParams = {},
     title = '',
     icon = '',
+    hideAddButton = false,
     isDivider = false,
   } = contentType;
 
@@ -49,7 +50,9 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
         S.documentList()
           .title(title)
           .filter([...(roleFilter ?? [])].join(' && '))
-          .params({ ...filterParams }),
+          .params({ ...filterParams })
+          .menuItems([])
+          .initialValueTemplates([]),
       );
   }
 
@@ -94,6 +97,10 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
             schemaType,
             ...filterParams,
           });
+
+        if (hideAddButton) {
+          return schemaBuilder.menuItems([]).initialValueTemplates([]);
+        }
 
         if (templates) {
           return schemaBuilder.initialValueTemplates([

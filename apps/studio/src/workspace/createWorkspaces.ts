@@ -11,6 +11,8 @@ import { templates } from '@/workspace/templates';
 import { getUserRoles } from '@/workspace/userRoles';
 import workspaces from '@/workspace/workspaces';
 
+import type { WorkspaceOptions } from 'sanity';
+
 import type { WorkspaceConfig } from '@/workspace/@types/common.types';
 
 const { SANITY_STUDIO_PROJECT_ID, SANITY_STUDIO_PREVIEW_URL } = envs;
@@ -55,7 +57,7 @@ const createWorkspaces: CreateWorkspaces = () =>
 
         return prev;
       },
-    };
+    } satisfies WorkspaceOptions;
   });
 
 export default createWorkspaces;

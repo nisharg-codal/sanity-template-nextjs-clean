@@ -70,11 +70,28 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
     workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
     children: [
       {
-        title: 'Active Authors',
-        schemaType: schemaNames.AUTHOR,
+        title: 'Authors',
         roles: [],
         workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
-        filters: ['isActive == true'],
+        children: [
+          {
+            title: 'Active',
+            schemaType: schemaNames.AUTHOR,
+            roles: [],
+            workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+            filters: ['isActive == true'],
+            isPlural: false,
+          },
+          {
+            title: 'Inactive',
+            schemaType: schemaNames.AUTHOR,
+            roles: [],
+            workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+            filters: ['isActive != true'],
+            isPlural: false,
+            hideAddButton: true,
+          },
+        ],
       },
       {
         title: 'Authors from GROQ',
@@ -135,10 +152,9 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
         isDivider: true,
       },
       {
-        schemaType: schemaNames.HOMEPAGE,
+        schemaType: schemaNames.AUTHOR,
         roles: [userRoles.DEVELOPER],
         workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
-        singleton: true,
       },
     ],
   },
@@ -148,35 +164,29 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
     workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
     children: [
       {
-        title: 'Authors without Create',
-        schemaType: schemaNames.AUTHOR,
-        roles: [],
-        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
-        hideAddButton: true,
-      },
-      {
-        title: 'Authors by Name',
+        title: 'Authors',
         roles: [],
         workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
         children: [
           {
-            title: 'Author 1',
+            title: 'Active',
             schemaType: schemaNames.AUTHOR,
             roles: [],
             workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+            filters: ['isActive == true'],
             isPlural: false,
             templates: {
-              name: 'Author 1',
+              isActive: true,
             },
           },
           {
-            title: 'Author 2',
+            title: 'Inactive',
             schemaType: schemaNames.AUTHOR,
             roles: [],
             workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+            filters: ['isActive != true'],
             isPlural: false,
             templates: {
-              name: 'Author 2',
               isActive: false,
             },
           },

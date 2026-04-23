@@ -28,18 +28,5 @@ export const templates: NonNullable<WorkspaceConfig['schema']>['templates'] = (p
     })
     .filter((item) => item !== null);
 
-  const allTemplates = [...prev, ...templatesContentTypes];
-
-  // Non creatable content types
-  const nonCreatableContentTypes = new Set(
-    allContentTypes
-      .filter(({ hideAddButton }) => hideAddButton)
-      .map(({ schemaType }) => schemaType),
-  );
-
-  // Get all the template which are allowed to be created
-  const templatesArr = allTemplates.filter(({ id }) => id !== 'thor-authorsWithoutCreate');
-
-  console.log(allTemplates);
-  return templatesArr;
+  return [...prev, ...templatesContentTypes];
 };

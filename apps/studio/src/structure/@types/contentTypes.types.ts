@@ -19,7 +19,7 @@ export interface ContentTypes {
   hideAddButton?: boolean;
   isDivider?: boolean;
   isPlural?: boolean;
-  templates?: Record<string, string | number | boolean>;
+  templates?: Record<string, unknown>;
 }
 
 export interface ContentTypesExtended extends ContentTypes {
