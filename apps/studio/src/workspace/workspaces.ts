@@ -1,7 +1,7 @@
 import { envs } from '@/config';
 import { workspaceTypes } from '@/constants/objects/types';
 import structure from '@/structure';
-import manualStructure from '@/structure/manualStructure';
+import defaultStructure from '@/structure/defaultStructure';
 
 import type { SetOptional } from 'type-fest';
 
@@ -9,23 +9,13 @@ import type { Workspace } from '@/workspace/@types/common.types';
 
 const baseWorkspaces = [
   {
-    name: workspaceTypes.OLD_STRUCTURE_BUILDER,
-    title: 'Old Structure Builder',
-    structure: manualStructure,
+    name: workspaceTypes.DEFAULT_STRUCTURE_BUILDER,
+    title: 'Default Structure Builder',
+    structure: defaultStructure,
   },
   {
-    name: workspaceTypes.STRUCTURE_BUILDER,
-    title: 'Structure Builder',
-    structure,
-  },
-  {
-    name: workspaceTypes.ROLES,
-    title: 'Roles',
-    structure,
-  },
-  {
-    name: workspaceTypes.TEMPLATES,
-    title: 'Templates',
+    name: workspaceTypes.CUSTOM_STRUCTURE_BUILDER,
+    title: 'Custom Structure Builder',
     structure,
   },
 ] satisfies SetOptional<Workspace, 'basePath' | 'dataset'>[];

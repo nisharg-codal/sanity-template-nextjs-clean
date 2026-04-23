@@ -5,7 +5,9 @@ import { schemaNames } from '@/constants/objects/schemaNames';
 
 import type { StructureResolver } from 'sanity/structure';
 
-const manualStructure: StructureResolver = (S) =>
+// Default Structure ( 54 lines )
+
+const defaultStructure: StructureResolver = (S) =>
   S.list()
     .title('Content Types')
     .items([
@@ -62,4 +64,45 @@ const manualStructure: StructureResolver = (S) =>
         ),
     ]);
 
-export default manualStructure;
+export default defaultStructure;
+
+// Custom Default Structure ( 37 lines )
+
+// [
+//   {
+//     title: 'General',
+//     isDivider: true,
+//   },
+//   {
+//     schemaType: schemaNames.HOMEPAGE,
+//     singleton: true,
+//   },
+//   {
+//     schemaType: schemaNames.AUTHOR,
+//   },
+//   {
+//     title: 'Author 2',
+//     icon: AddUserIcon,
+//     schemaType: schemaNames.AUTHOR,
+//     isPlural: false,
+//   },
+//   {
+//     title: 'Drawer Example',
+//     isDivider: true,
+//   },
+//   {
+//     title: 'Drawer',
+//     icon: ComponentIcon,
+//     children: [
+//       {
+//         schemaType: schemaNames.AUTHOR,
+//       },
+//       {
+//         title: 'Author 2',
+//         icon: AddUserIcon,
+//         schemaType: schemaNames.AUTHOR,
+//         isPlural: false,
+//       },
+//     ],
+//   },
+// ];

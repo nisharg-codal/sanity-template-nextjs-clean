@@ -1,6 +1,4 @@
 export const workspaceTypes = {
-  OLD_STRUCTURE_BUILDER: 'old-structure-builder',
-  STRUCTURE_BUILDER: 'structure-builder',
-  ROLES: 'roles',
-  TEMPLATES: 'templates',
+  DEFAULT_STRUCTURE_BUILDER: 'default-structure-builder',
+  CUSTOM_STRUCTURE_BUILDER: 'custom-structure-builder',
 } as const;
