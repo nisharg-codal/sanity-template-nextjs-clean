@@ -18,11 +18,11 @@ const baseWorkspaces = [
     title: 'Custom Structure Builder',
     structure,
   },
-  // {
-  //   name: workspaceTypes.TOOLS,
-  //   title: 'Tools',
-  //   structure,
-  // },
+  {
+    name: workspaceTypes.TOOLS,
+    title: 'Tools',
+    structure,
+  },
 ] satisfies SetOptional<Workspace, 'basePath' | 'dataset'>[];
 
 const workspaces = baseWorkspaces.map((item) => ({

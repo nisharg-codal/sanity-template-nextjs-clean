@@ -119,6 +119,36 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
     ],
   },
   {
+    title: 'Workspaces',
+    roles: [],
+    workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER, workspaceTypes.TOOLS],
+    children: [
+      {
+        title: 'Custom Structure Builder Workspace Only',
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+        isDivider: true,
+      },
+      {
+        schemaType: schemaNames.HOMEPAGE,
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+        singleton: true,
+      },
+      {
+        title: 'Tools Workspace Only',
+        roles: [],
+        workspaces: [workspaceTypes.TOOLS],
+        isDivider: true,
+      },
+      {
+        schemaType: schemaNames.AUTHOR,
+        roles: [],
+        workspaces: [workspaceTypes.TOOLS],
+      },
+    ],
+  },
+  {
     title: 'Roles',
     roles: [userRoles.EDITOR, userRoles.DEVELOPER],
     workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
@@ -157,6 +187,17 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
         schemaType: schemaNames.AUTHOR,
         roles: [userRoles.DEVELOPER],
         workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+      },
+      {
+        title: 'Tools Workspace Only',
+        roles: [],
+        workspaces: [workspaceTypes.TOOLS],
+        isDivider: true,
+      },
+      {
+        schemaType: schemaNames.AUTHOR,
+        roles: [],
+        workspaces: [workspaceTypes.TOOLS],
       },
     ],
   },

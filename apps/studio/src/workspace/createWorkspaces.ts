@@ -4,7 +4,7 @@ import { presentationTool } from 'sanity/presentation';
 import { structureTool } from 'sanity/structure';
 
 import envs from '@/config/envs';
-import { userRoles } from '@/constants/objects';
+import { userRoles, workspaceTypes } from '@/constants/objects';
 import schemaTypes from '@/schemas';
 import { documentActions } from '@/workspace/documentActions';
 import { templates } from '@/workspace/templates';
@@ -52,7 +52,7 @@ const createWorkspaces: CreateWorkspaces = () =>
         const { schema, currentUser } = context;
 
         const isAdmin = getUserRoles({ currentUser }).includes(userRoles.ADMINISTRATOR);
-        const isToolsWorkspace = schema.name === 'tools';
+        const isToolsWorkspace = schema.name === workspaceTypes.TOOLS;
 
         if (!isAdmin || isToolsWorkspace) return prev.filter((tool) => tool.name !== 'vision');
 
