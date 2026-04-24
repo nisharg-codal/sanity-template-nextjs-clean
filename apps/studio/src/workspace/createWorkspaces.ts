@@ -49,11 +49,12 @@ const createWorkspaces: CreateWorkspaces = () =>
         actions: documentActions,
       },
       tools: (prev, context) => {
-        const { currentUser } = context;
+        const { schema, currentUser } = context;
 
         const isAdmin = getUserRoles({ currentUser }).includes(userRoles.ADMINISTRATOR);
+        const isToolsWorkspace = schema.name === 'tools';
 
-        if (!isAdmin) return prev.filter((tool) => tool.name !== 'vision');
+        if (!isAdmin || isToolsWorkspace) return prev.filter((tool) => tool.name !== 'vision');
 
         return prev;
       },
