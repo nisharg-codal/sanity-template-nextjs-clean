@@ -59,7 +59,7 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
     ],
   },
   {
-    title: 'Examples',
+    title: 'Feature Examples',
     roles: [userRoles.EDITOR, userRoles.DEVELOPER],
     workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
     isDivider: true,
