@@ -24,12 +24,17 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
     workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
   },
   {
+    schemaType: schemaNames.AUTHOR,
+    roles: [],
+    workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+    isPlural: false,
+  },
+  {
     title: 'Author 2',
     icon: AddUserIcon,
     schemaType: schemaNames.AUTHOR,
     roles: [],
     workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
-    isPlural: false,
   },
   {
     title: 'Drawer',
@@ -54,7 +59,6 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
         schemaType: schemaNames.AUTHOR,
         roles: [],
         workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
-        isPlural: false,
       },
     ],
   },
@@ -80,7 +84,6 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
             roles: [],
             workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
             filters: ['isActive == true'],
-            isPlural: false,
           },
           {
             title: 'Inactive',
@@ -88,7 +91,6 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
             roles: [],
             workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
             filters: ['isActive != true'],
-            isPlural: false,
             hideAddButton: true,
           },
         ],
@@ -174,7 +176,6 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
             roles: [],
             workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
             filters: ['isActive == true'],
-            isPlural: false,
             templates: {
               isActive: true,
             },
@@ -185,7 +186,6 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
             roles: [],
             workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
             filters: ['isActive != true'],
-            isPlural: false,
             templates: {
               isActive: false,
             },

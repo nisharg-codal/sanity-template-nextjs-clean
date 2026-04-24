@@ -65,7 +65,7 @@ const renderContentType: RenderContentType = (S, context, contentType) => {
 
   const schemaTitle = (() => {
     const sanityTitle = S.documentTypeListItem(schemaType).getTitle();
-    const isItPlural = isPlural ?? !singleton;
+    const isItPlural = title ? false : (isPlural ?? !singleton);
     const mainTitle = title || (sanityTitle ?? '');
 
     return isItPlural ? plural(mainTitle) : mainTitle;
