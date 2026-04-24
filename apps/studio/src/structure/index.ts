@@ -22,7 +22,7 @@ const structure: StructureResolver = (S, context) => {
     .title('Content Types')
     .items(
       workspaceContentTypes
-        .map((contentType) => renderContentType(S, contentType, currentUser))
+        .map((contentType) => renderContentType(S, { ...context, currentUser }, contentType))
         .filter((item) => item !== null),
     );
 };

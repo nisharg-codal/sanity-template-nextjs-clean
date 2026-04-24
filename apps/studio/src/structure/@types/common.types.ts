@@ -1,8 +1,13 @@
 import type { CurrentUser } from 'sanity';
-import type { ListBuilder, StructureBuilder } from 'sanity/structure';
+import type { StructureBuilder, StructureResolverContext } from 'sanity/structure';
+import type { SetNonNullable } from 'type-fest';
 
 import type { UserRole, WorkspaceType } from '@/constants/@types/objects.types';
-import type { ContentTypes, ContentTypesExtended } from '@/structure/@types/contentTypes.types';
+import type {
+  ContentTypeRaw,
+  ContentTypes,
+  ContentTypesExtended,
+} from '@/structure/@types/contentTypes.types';
 
 // Get workspace sites
 
@@ -24,6 +29,6 @@ export type GetWorkspaceContentTypes = (
 
 export type RenderContentType = (
   S: StructureBuilder,
+  context: SetNonNullable<StructureResolverContext, 'currentUser'>,
   contentType: ContentTypesExtended,
-  currentUser: CurrentUser,
-) => Parameters<ListBuilder['items']>[0][number] | null;
+) => ReturnType<ContentTypeRaw>;

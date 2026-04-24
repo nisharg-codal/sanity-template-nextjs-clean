@@ -1,6 +1,6 @@
 import { AddUserIcon, ComponentIcon } from '@sanity/icons';
 
-import { userRoles, workspaceTypes } from '@/constants/objects';
+import { constants, userRoles, workspaceTypes } from '@/constants/objects';
 import { schemaNames } from '@/constants/objects/schemaNames';
 
 import type { ContentTypes } from '@/structure/@types/contentTypes.types';
@@ -191,6 +191,81 @@ export const customStructureBuilderContentTypes: ContentTypes[] = [
             },
           },
         ],
+      },
+    ],
+  },
+  {
+    title: 'Raw',
+    roles: [],
+    workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+    children: [
+      {
+        raw: (S) => S.divider().title('General'),
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+      },
+      {
+        raw: (S) =>
+          S.listItem()
+            .title('Homepage')
+            .schemaType(schemaNames.HOMEPAGE)
+            .child(
+              S.editor()
+                .schemaType(schemaNames.HOMEPAGE)
+                .documentId([schemaNames.HOMEPAGE, constants.SINGLETON_KEY].join('-')),
+            ),
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+      },
+      {
+        raw: (S) =>
+          S.listItem()
+            .title('Authors')
+            .schemaType(schemaNames.AUTHOR)
+            .child(S.documentTypeList(schemaNames.AUTHOR).title('Authors')),
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+      },
+      {
+        raw: (S) =>
+          S.listItem()
+            .title('Author 2')
+            .icon(AddUserIcon)
+            .schemaType(schemaNames.AUTHOR)
+            .child(S.documentTypeList(schemaNames.AUTHOR).title('Author 2')),
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+      },
+      {
+        raw: (S) => S.divider().title('Drawer Example'),
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
+      },
+      {
+        raw: (S) =>
+          S.listItem()
+            .title('Drawer')
+            .icon(ComponentIcon)
+            .child(
+              S.list()
+                .title('Drawer')
+                .items([
+                  // Author
+                  S.listItem()
+                    .title('Authors')
+                    .schemaType(schemaNames.AUTHOR)
+                    .child(S.documentTypeList(schemaNames.AUTHOR).title('Authors')),
+
+                  // Author 2
+                  S.listItem()
+                    .title('Author 2')
+                    .icon(AddUserIcon)
+                    .schemaType(schemaNames.AUTHOR)
+                    .child(S.documentTypeList(schemaNames.AUTHOR).title('Author 2')),
+                ]),
+            ),
+        roles: [],
+        workspaces: [workspaceTypes.CUSTOM_STRUCTURE_BUILDER],
       },
     ],
   },

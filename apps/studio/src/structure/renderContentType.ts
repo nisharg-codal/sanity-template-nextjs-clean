@@ -4,11 +4,14 @@ import { constants } from '@/constants/objects';
 
 import type { RenderContentType } from '@/structure/@types/common.types';
 
-const renderContentType: RenderContentType = (S, contentType, currentUser) => {
+const renderContentType: RenderContentType = (S, context, contentType) => {
+  const { currentUser } = context;
+
   const {
     id,
     schemaType,
     children,
+    raw,
     singleton,
     isPlural,
     templates,
@@ -19,6 +22,8 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
     hideAddButton = false,
     isDivider = false,
   } = contentType;
+
+  if (raw) return raw(S, context);
 
   const roleFilter = typeof filters === 'function' ? filters(currentUser) : filters;
 
@@ -35,7 +40,7 @@ const renderContentType: RenderContentType = (S, contentType, currentUser) => {
           .title(title)
           .items(
             children
-              .map((child) => renderContentType(S, child, currentUser))
+              .map((child) => renderContentType(S, context, child))
               .filter((child) => child !== null),
           ),
       );
